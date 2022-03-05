@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>  
+using namespace std;     
+main()  
+{     
+    long int t,n,i,j,ans;    
+    long int mod=1e9+7;  
+    long int dp[1000001][2];
+        memset(dp,0,sizeof dp);
+        dp[1][0]=1; 
+        dp[1][1]=1;      
+        for(i=2;i<=1000000;i++)
+        {  
+            long int ans1=(dp[i-1][0]+dp[i-1][1])%mod;  
+            long int ans2=dp[i-1][1];  
+            long int ans3=(dp[i-1][0]*2)%mod; 
+            long int ans4=dp[i-1][0];  
+            dp[i][1]=(ans1+ans2)%mod;  
+            dp[i][0]=((ans1+ans3)%mod+ans4)%mod;  
+        }
+    cin>>t; 
+    while(t--)
+    {  
+        cin>>n;   
+        ans=(dp[n][0]+dp[n][1])%mod;
+        cout<<ans<<endl;  
+    }
+}
